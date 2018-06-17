@@ -64,7 +64,7 @@ public class Player {
     }
 
     public void lost() {
-        currentBet = 0;
+        
     }
 
     public Card hitCard() {

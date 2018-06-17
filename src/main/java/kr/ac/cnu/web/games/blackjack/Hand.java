@@ -24,7 +24,7 @@ public class Hand {
         return card;
     }
 
-    public int getCardSum() { // Noeun, Jhyun 수정
+    public int getCardSum() { // Jhyun 수정
         int cardSum = 0;
         for (int i = 0; i < cardList.size(); i++) {
             if (cardList.get(i).getRank() >= 11) cardSum += 10;

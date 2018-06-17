@@ -70,6 +70,21 @@ public class GameRoom {
         player.stand();
     }
 
+    public void playDealer_OnCase() {
+        dealer.play();
+        evaluator.evaluate();
+    }
+
+    public void playDealer_FinCase() {
+        evaluator.evaluate();
+        this.isFinished = true;
+    }
+
+    public void playDealer_DealWinCase() {
+        evaluator.evaluate();
+        this.isFinished = true;
+    }
+
     public void playDealer() {
         dealer.play();
         evaluator.evaluate();

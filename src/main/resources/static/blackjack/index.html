@@ -530,11 +530,13 @@
     })
 
     $('#more').click(function() {
-        var bet = 100;
+        var bet = 1000;
         var currentBet = parseInt($('#bet').html());
         var money = parseInt($('#money').html());
         if (money < bet) {
             bet = money;
+        } else if (currentBet >= 9000) {
+            $('#more').hide()
         }
 
         $('#bet').html(currentBet + bet);
@@ -542,11 +544,13 @@
     });
 
     $('#less').click(function(){
-        var bet = 100;
+        var bet = 1000;
         var currentBet = parseInt($('#bet').html());
         var money = parseInt($('#money').html());
         if(currentBet < bet) {
             bet = currentBet;
+        }else if(currentBet<=10000) {
+            $('#more').show();
         }
 
         $('#bet').html(currentBet - bet);

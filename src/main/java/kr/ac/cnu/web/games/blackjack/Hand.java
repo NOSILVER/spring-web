@@ -4,6 +4,7 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by rokim on 2018. 5. 26..
@@ -23,10 +24,19 @@ public class Hand {
         return card;
     }
 
-    public int getCardSum() { // Noeun 수정
+    public int getCardSum() { // Jhyun 수정
         int cardSum = 0;
-        for(int i=0; i<cardList.size(); i++){
-            if(cardList.get(i).getRank()>=11) cardSum += 10;
+        for (int i = 0; i < cardList.size(); i++) {
+            if (cardList.get(i).getRank() >= 11) cardSum += 10;
+            else if (cardList.get(i).getRank() == 1) {
+                Random r = new Random();
+                int Random_Num= r.nextInt(10);
+                if (Random_Num <= 5) {
+                    cardSum +=1;
+                } else {
+                    cardSum +=11;
+                }
+            }
             else cardSum += cardList.get(i).getRank();
         }
         return cardSum;

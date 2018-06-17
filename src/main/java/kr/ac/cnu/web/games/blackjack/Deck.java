@@ -1,6 +1,7 @@
 package kr.ac.cnu.web.games.blackjack;
 
 import kr.ac.cnu.web.exceptions.NoMoreCardException;
+import lombok.Data;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -10,10 +11,9 @@ import java.util.List;
 /**
  * Created by rokim on 2018. 5. 26..
  */
+@Data
 public class Deck {
-    @Getter
     private final int number;
-    @Getter
     private final List<Card> cardList;
 
     public Deck(int number) {

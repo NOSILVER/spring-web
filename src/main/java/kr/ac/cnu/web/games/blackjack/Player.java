@@ -17,6 +17,10 @@ public class Player {
     @Getter
     private Hand hand;
 
+    public void setIsPlaying(boolean insert){
+        this.isPlaying = insert;
+    }
+
     public Player(long seedMoney, Hand hand) {
         this.balance = seedMoney;
         this.hand = hand;

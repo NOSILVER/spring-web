@@ -25,7 +25,7 @@ public class Dealer {
     }
 
     public void play() {
-        while(hand.getCardSum() < 17) {
+        if(hand.getCardSum() < 17) {
             hand.drawCard();
         }
     }

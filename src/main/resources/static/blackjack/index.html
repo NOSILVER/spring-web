@@ -399,7 +399,7 @@
     }
 
     .money{
-        color: green;
+        color: #B272B2;
         font-size: 21px;
     }
 </style>
@@ -418,6 +418,17 @@
     </div>
 </div>
 <div class="page" id="game" style="display: none">
+    <div>
+        <b class="money">My Name :  </b>
+        <span id="myName" class="money"></span>
+        <div class="clear"></div>
+    </div>
+    <div>
+        <b class="money">My Money : </b>
+        <span id="money" class="money"></span>
+        <div class="clear"></div>
+    </div>
+
     <div class="dealer-cards"></div>
     <div class="clear"></div>
     <div class="player-cards"></div>
@@ -432,11 +443,7 @@
         </div>
         <div class="clear"></div>
     </div>
-    <div>
-        <b>Available Funds</b><br>
-        <span id="money" class="money"></span>
-        <div class="clear"></div>
-    </div>
+
 </div>
 </body>
 <script src="./jquery-3.3.1.min.js"></script>
@@ -456,6 +463,7 @@
             $('#login').hide();
             $('#lobby').show();
             user = data;
+            $('#myName').html(data.name);
         });
     });
 

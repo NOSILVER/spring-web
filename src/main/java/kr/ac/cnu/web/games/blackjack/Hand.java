@@ -23,7 +23,7 @@ public class Hand {
         return card;
     }
 
-    public int getCardSum() {
+    public int getCardSum() { // Noeun 수정
         int cardSum = 0;
         for(int i=0; i<cardList.size(); i++){
             if(cardList.get(i).getRank()>=11) cardSum += 10;

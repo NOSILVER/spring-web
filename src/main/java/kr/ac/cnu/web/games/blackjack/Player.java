@@ -55,6 +55,7 @@ public class Player {
     if(currentBet>=10000){
         currentBet = 10000;
         }
+
     }
 
     public void blackjack() {

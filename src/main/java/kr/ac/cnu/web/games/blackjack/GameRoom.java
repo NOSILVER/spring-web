@@ -90,5 +90,9 @@ public class GameRoom {
         evaluator.evaluate();
         this.isFinished = true;
     }
+    public long getPlayerAccount(String name) {
+        Player player = playerList.get(name);
+        return player.getBalance()+player.getCurrentBet();
+    }
 
 }

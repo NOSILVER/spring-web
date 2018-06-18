@@ -51,6 +51,13 @@
         background-color: #FFFFFF;
     }
 
+    .rank{
+        border: 1px solid black;
+        width: 150px;
+        height: 200px;
+        float:left;
+     }
+
     .clear{
         clear: both;
     }
@@ -432,6 +439,7 @@
     <div class="dealer-cards"></div>
     <div class="clear"></div>
     <div class="player-cards"></div>
+    <div id="rank" class="rank"></div>
     <div class="buttons"><div class="btn" id="hit">Hit</div><div class="btn" id="stand">Stand</div><div class="btn" id="doubledown">DoubleDown</div></div>
     <div class="buttons"><div class="btn" id="deal">Deal</div></div>
     <div class="betting-area">
@@ -463,8 +471,17 @@
             $('#login').hide();
             $('#lobby').show();
             user = data;
-            $('#myName').html(data.name);
-        });
+            $('#myName').html(user.name);
+            $('#money').html(user.account);
+
+            $('#user_info').show();
+             $.ajax({
+             type: 'GET',
+            url: 'http://localhost:8080/api/black-jack/rankAccount'
+            }).done(function(data){
+             $('#rank').html(data);
+             });
+                    });
     });
 
     $('#signup_button').click(function() {
@@ -478,6 +495,16 @@
             $('#login').hide();
             $('#lobby').show();
             user = data;
+            $('#name').html(user.name);
+            $('#money').html(user.account);
+            $('#user_info').show();
+             $.ajax({
+            type: 'GET',
+            url: 'http://localhost:8080/api/black-jack/rankAccount'
+            }).done(function(data){
+            console.log(data);
+            $('#rank').html(data);
+            });
         });
     });
 
@@ -544,7 +571,6 @@
     })
 
     $('#doubledown').click(function() {
-
         $.ajax({
             type: 'POST',
             url: 'http://localhost:8080/api/black-jack/rooms/' + gameRoomId + '/doubledown',
@@ -594,6 +620,25 @@
             $('#hit').hide();
             $('#stand').hide();
             $('#doubledown').hide();
+
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:8080/api/black-jack/rooms/' + gameRoomId + '/updateAccount',
+                headers: {
+                    'name':user.name
+                },
+            });
+            $.ajax({
+            type: 'GET',
+            url: 'http://localhost:8080/api/black-jack/rankAccount'
+            }).done(function(data){
+            var html ="";
+            for(var i = 0; i<data.length; i++){
+            html+="<b>"+(i+1)+"."+data[i].name+" "+data[i].account+"</b><br/>"
+            }
+
+            $('#rank').html(html);
+            });
         } else {
             $('#deal').hide();
             $('#more').hide();

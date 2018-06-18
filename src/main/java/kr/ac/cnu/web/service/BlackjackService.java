@@ -76,4 +76,18 @@ public class BlackjackService {
         return gameRoom;
     }
 
+    public GameRoom doubledown(String roomId, User user) {
+        GameRoom gameRoom = gameRoomMap.get(roomId);
+        gameRoom.getPlayerList().get(user.getName()).placeBet(gameRoom.getPlayerList().get(user.getName()).getCurrentBet());
+        gameRoom.getPlayerList().get(user.getName()).setCurrentBet(gameRoom.getPlayerList().get(user.getName()).getCurrentBet() *2);
+
+        gameRoom.hit(user.getName());
+
+        gameRoom.getPlayerList().get(user.getName()).setIsPlaying(false);
+        gameRoom.playDealer_FinCase();
+
+
+        return gameRoom;
+    }
+
 }

@@ -3,6 +3,7 @@ package kr.ac.cnu.web.service;
 import kr.ac.cnu.web.games.blackjack.Deck;
 import kr.ac.cnu.web.games.blackjack.GameRoom;
 import kr.ac.cnu.web.model.User;
+import kr.ac.cnu.web.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -50,13 +51,13 @@ public class BlackjackService {
         return gameRoom;
     }
 
-    public GameRoom hit(String roomId, User user) {
+    public GameRoom hit(String roomId, User user,UserRepository repository) {
         GameRoom gameRoom = gameRoomMap.get(roomId);
 
         gameRoom.hit(user.getName());
         if(gameRoom.getPlayerList().get(user.getName()).getHand().getCardSum() >= 21){
             gameRoom.getPlayerList().get(user.getName()).setIsPlaying(false);
-            gameRoom.playDealer_FinCase();
+            gameRoom.playDealer_FinCase(repository);
         }
         else{
             gameRoom.playDealer_OnCase();
@@ -67,16 +68,16 @@ public class BlackjackService {
         return gameRoom;
     }
 
-    public GameRoom stand(String roomId, User user) {
+    public GameRoom stand(String roomId, User user,UserRepository repository) {
         GameRoom gameRoom = gameRoomMap.get(roomId);
 
         gameRoom.stand(user.getName());
-        gameRoom.playDealer();
+        gameRoom.playDealer(repository);
 
         return gameRoom;
     }
 
-    public GameRoom doubledown(String roomId, User user) {
+    public GameRoom doubledown(String roomId, User user,UserRepository repository) {
         GameRoom gameRoom = gameRoomMap.get(roomId);
         gameRoom.getPlayerList().get(user.getName()).placeBet(gameRoom.getPlayerList().get(user.getName()).getCurrentBet());
         gameRoom.getPlayerList().get(user.getName()).setCurrentBet(gameRoom.getPlayerList().get(user.getName()).getCurrentBet() *2);
@@ -84,7 +85,7 @@ public class BlackjackService {
         gameRoom.hit(user.getName());
 
         gameRoom.getPlayerList().get(user.getName()).setIsPlaying(false);
-        gameRoom.playDealer_FinCase();
+        gameRoom.playDealer_FinCase(repository);
 
 
         return gameRoom;

@@ -526,6 +526,7 @@
     })
 
     $('#stand').click(function() {
+        var currentBet = parseInt($('#bet').html());
         $.ajax({
             type: 'POST',
             url: 'http://localhost:8080/api/black-jack/rooms/' + gameRoomId + '/stand',
@@ -534,6 +535,11 @@
             },
         }).done(function(data) {
             drawGameRoom(data);
+            if (currentBet >= 9000) {
+                $('#more').hide()
+            }else if(currentBet<=10000) {
+                $('#more').show();
+            }
         });
     })
 

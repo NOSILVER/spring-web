@@ -1,5 +1,7 @@
 package kr.ac.cnu.web.games.blackjack;
 
+import kr.ac.cnu.web.model.User;
+import kr.ac.cnu.web.repository.UserRepository;
 import lombok.Getter;
 
 import java.util.HashMap;
@@ -75,8 +77,11 @@ public class GameRoom {
         evaluator.evaluate();
     }
 
-    public void playDealer_FinCase() {
+    public void playDealer_FinCase(UserRepository repository) {
         evaluator.evaluate();
+        playerList.forEach((s,p)->{
+            repository.save(new User(s,p.getBalance()));
+        });
         this.isFinished = true;
     }
 
@@ -85,9 +90,13 @@ public class GameRoom {
         this.isFinished = true;
     }
 
-    public void playDealer() {
+    public void playDealer(UserRepository repository) {
         dealer.play();
         evaluator.evaluate();
+        playerList.forEach((s,p)->{
+
+            repository.save(new User(s,p.getBalance()));
+        });
         this.isFinished = true;
     }
     public long getPlayerAccount(String name) {

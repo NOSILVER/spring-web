@@ -33,7 +33,7 @@ public class BlackApiController {
     @Autowired
     private BlackjackService blackjackService;
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository userRepository;//저장소
 
     @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
     public User login(@RequestBody String name) {
@@ -74,21 +74,21 @@ public class BlackApiController {
     public GameRoom hit(@RequestHeader("name") String name, @PathVariable String roomId) {
         User user = this.getUserFromSession(name);
 
-        return blackjackService.hit(roomId, user);
+        return blackjackService.hit(roomId, user,userRepository);
     }
 
     @PostMapping("/rooms/{roomId}/stand")
     public GameRoom stand(@RequestHeader("name") String name, @PathVariable String roomId) {
         User user = this.getUserFromSession(name);
 
-        return blackjackService.stand(roomId, user);
+        return blackjackService.stand(roomId, user,userRepository);
     }
 
     @PostMapping("/rooms/{roomId}/doubledown")
     public GameRoom doubledown(@RequestHeader("name") String name, @PathVariable String roomId){
         User user = this.getUserFromSession(name);
 
-        return blackjackService.doubledown(roomId, user);
+        return blackjackService.doubledown(roomId, user,userRepository);
     }
 
     @GetMapping("/rooms/{roomId}")

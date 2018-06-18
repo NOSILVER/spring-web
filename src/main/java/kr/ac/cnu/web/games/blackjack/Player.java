@@ -2,6 +2,7 @@ package kr.ac.cnu.web.games.blackjack;
 
 import kr.ac.cnu.web.exceptions.NotEnoughBalanceException;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
@@ -11,6 +12,7 @@ public class Player {
     @Getter
     private long balance;
     @Getter
+    @Setter
     private long currentBet;
     @Getter
     private boolean isPlaying;
@@ -50,12 +52,16 @@ public class Player {
 
     public void win() {
         balance += currentBet * 2;
-
+    if(currentBet>=10000){
+        currentBet = 10000;
+        }
     }
 
     public void blackjack() {
         balance += currentBet * 1.5;
-
+        if(currentBet>=10000){
+            currentBet = 10000;
+        }
     }
 
     public void tie() {
@@ -64,7 +70,9 @@ public class Player {
     }
 
     public void lost() {
-        
+        if(currentBet>=10000){
+            currentBet = 10000;
+        }
     }
 
     public Card hitCard() {
